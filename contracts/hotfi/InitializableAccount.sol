@@ -14,19 +14,19 @@ import "@openzeppelin/contracts/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 /**
-  * hotfi account.
-  *  this is hotfi minimal account.
+  * Initializable account.
+  *  this is Initializable minimal account.
   *  using hotx token to pay gas cost.
   *  has execute, eth handling methods
   *  has a single signer that can send requests through the entryPoint.
   */
-contract HotfiAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeable, Initializable {
+contract InitializableAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeable, Initializable {
     using ECDSA for bytes32;
     address public owner;
 
     IEntryPoint private immutable _entryPoint;
 
-    event HotfiAccountInitialized(IEntryPoint indexed entryPoint, address indexed owner);
+    event InitializableAccountInitialized(IEntryPoint indexed entryPoint, address indexed owner);
 
     modifier onlyOwner() {
         _onlyOwner();
@@ -72,7 +72,7 @@ contract HotfiAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeable, Ini
 
     /**
      * @dev The _entryPoint member is immutable, to reduce gas consumption.  To upgrade EntryPoint,
-     * a new implementation of HotfiAccount must be deployed with the new EntryPoint address, then upgrading
+     * a new implementation of InitializableAccount must be deployed with the new EntryPoint address, then upgrading
       * the implementation by calling `upgradeTo()`
       * @param initOps operations when account is initiated
      */
@@ -88,7 +88,7 @@ contract HotfiAccount is BaseAccount, TokenCallbackHandler, UUPSUpgradeable, Ini
             _call(target, value, data);
         }
         
-        emit HotfiAccountInitialized(_entryPoint, owner);
+        emit InitializableAccountInitialized(_entryPoint, owner);
     }
 
     // Require the function call went through EntryPoint or owner

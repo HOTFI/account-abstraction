@@ -1,7 +1,7 @@
 import { HardhatRuntimeEnvironment } from 'hardhat/types'
 import { task, types } from "hardhat/config"
 
-task("deploy:hotfiContracts", "Deploy hofi account factory")
+task("deploy:initializableContracts", "Deploy hofi account factory")
     .setAction(async ({}, 
         { ethers, run }) =>{
     const provider = ethers.provider
@@ -25,9 +25,9 @@ task("deploy:hotfiContracts", "Deploy hofi account factory")
     console.log('==TestPriceFeed addr=', oracle.address)
   
   
-    const factory = await(await ethers.getContractFactory('HotfiAccountFactory')).deploy(entrypoint.address)  
+    const factory = await(await ethers.getContractFactory('InitializableAccountFactory')).deploy(entrypoint.address)  
     await factory.deployed()
-    console.log('==HotfiAccountFactory addr=', factory.address)
+    console.log('==InitializableAccountFactory addr=', factory.address)
   
     const paymaster = await(await ethers.getContractFactory('ChainlinkPaymaster')).deploy(factory.address, entrypoint.address, tc.address, oracle.address)
     await paymaster.deployed()

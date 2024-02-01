@@ -6,7 +6,7 @@ import '@nomiclabs/hardhat-etherscan'
 
 import 'solidity-coverage'
 
-import './tasks/DeployHotfiContracts'
+import './tasks/DeployInitializableContracts'
 
 import * as fs from 'fs'
 

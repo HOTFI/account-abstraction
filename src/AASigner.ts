@@ -200,6 +200,8 @@ export class AAProvider extends BaseProvider {
 export class AASigner extends Signer {
   _account?: SimpleAccount
 
+  _paymaster = '0x'
+
   private _isPhantom = true
   public entryPoint: EntryPoint
 
@@ -244,6 +246,10 @@ export class AASigner extends Signer {
     const ownerAddress = await this.signer.getAddress()
     const initializeCall = new Interface(SimpleAccount__factory.abi).encodeFunctionData('initialize', [ownerAddress])
     return new ERC1967Proxy__factory(this.signer).getDeployTransaction(implementationAddress, initializeCall).data!
+  }
+
+  setPaymster(paymaster: string){
+    this._paymaster = paymaster
   }
 
   async getAddress (): Promise<string> {
@@ -403,7 +409,8 @@ export class AASigner extends Signer {
       callData: execFromEntryPoint.data!,
       callGasLimit: tx.gasLimit,
       maxPriorityFeePerGas,
-      maxFeePerGas
+      maxFeePerGas,
+      paymasterAndData: this._paymaster,
     }, this.signer, this.entryPoint)
 
     return userOp
