@@ -6,6 +6,8 @@ import '@nomiclabs/hardhat-etherscan'
 
 import 'solidity-coverage'
 
+import './tasks/DeployInitializableContracts'
+
 import * as fs from 'fs'
 
 const mnemonicFileName = process.env.MNEMONIC_FILE ?? `${process.env.HOME}/.secret/testnet-mnemonic.txt`
