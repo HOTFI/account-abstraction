@@ -23,6 +23,6 @@ yarn runop2
 
 [Abstruct account reference implementation](https://github.com/eth-infinitism/account-abstraction)
 
-[Bundler reference implementation](https://github.com/eth-infinitism/bundler)
+[Bundler reference implementation](https://github.com/HOTFI/hotfi-bundler)
 
 [Bundler specification test suite](https://github.com/eth-infinitism/bundler-spec-tests)
